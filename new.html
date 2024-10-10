@@ -3,94 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #93a96b;
-            margin: 0;
-            padding: 30px;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
-        
-        .portfolio {
-            margin: 50px;
-            font-size: 5vw;
-            margin-bottom: 20px;
-            
-        }
-
-        .image {
-            position: absolute;
-            width: 40vh;
-            height: 40vh;
-            top: 5vh;
-            right: 20vh;
-            border-radius: 50%;
-            background-image: url('pic.jpg');
-            background-size: cover; /* Ensures the image covers the div */
-            background-position: center; /* Centers the image within the div */
-                   
-        }   
-        footer {
-            background-color: #505e36;
-            color: #fff;
-            text-align: center;
-            padding: 1vh;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <title>Audio Platform</title>
 </head>
 <body>
-    
-    <div class="portfolio">
-        Mithul MJ
-       
-    </div>
+    <header>
+        <h1>Welcome to the Audio Platform</h1>
+    </header>
 
-    
-        <p>Diploma in Computer Science Student</p>
-        <p>Location: Vendore, Thrissur, Kerala</p>
-        <h2>About Me</h2>
-        <p>I am Mithul MJ, currently pursuing a Diploma in Computer Science in MTI Thrissur, Kerala. I am passionate about programming and technology.</p>
-        <p>I hail from Vendore, which is located near Amballur in Thrissur.</p>
-    
-    
-    <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>Python</li>
-            <li>Java</li>
-            <li>C Programming</li>
-            <li>MYSQL</li>
-            <li>Django</li>
-            <li>PHP</li>
-        </ul>
-    </section>
+    <main>
+        <section class="audio-list">
+            <h2>Newly Released Audios</h2>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <p>Coming soon...</p>
-    </section>
+            <div class="audio-item">
+                <h3>Audio Story 1</h3>
+                <audio controls>
+                    <source src="https://github.com/mithul-mj/mithul-mj.github.io/blob/8bae0bf8db6bb4ec4b1040acb26dd942784c1ed9/vivegam_dialog.mp3?raw=true" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
 
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Email: mithulmj@example.com</p>
-    </section>
-    </div>
-    <div class="image">
-        
-    </div>
+            <!-- Add more audio items as needed -->
+        </section>
+    </main>
+
     <footer>
-        <p>&copy; 2024 Mithul MJ</p>
+        <p>&copy; 2024 Audio Platform</p>
     </footer>
-    
 </body>
 </html>
