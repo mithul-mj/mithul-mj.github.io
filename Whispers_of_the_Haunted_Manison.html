@@ -9,7 +9,6 @@
     <style>
         body{
             margin: 0;
-            
             padding: 0;
             background-color: rgb(202, 202, 202);
         }
@@ -18,7 +17,6 @@
             flex-wrap: wrap;
             margin: 10px;
             height: 90vh;
-            
           }
         .div_one{
             display: flex;
@@ -52,122 +50,106 @@
             align-items: center;
             padding: 10px;
         }
-        
-  
 
+        .episode-list h2 {
+          text-align: center;
+          margin-bottom: 20px;
+        }
 
+        .episode {
+          display: flex;
+          width: 100%;
+          padding: 15px;
+          background-color: #8d6b6b;
+          margin-bottom: 10px;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
 
+        .episode:hover {
+          background-color: #c04444;
+        }
 
-    .episode-list h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      
-    }
+        .audio-player {
+          width: 60%;
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
 
-    .episode {
-      display: flex;
-      width: 100%;
-      padding: 15px;
-      background-color: #8d6b6b;
-      margin-bottom: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+        .story_image_div {
+         display: flex;
+         justify-content: center;
+          width: 100%;
+          height: 300px;
+          margin-bottom: 10px;
+          border-radius: 10px;
+          overflow: hidden;
+        }
 
-    .episode:hover {
-      background-color: #c04444;
-    }
+        .story_image {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: cover;
+        }
 
-    .audio-player {
-      width: 60%;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+        .audio-player h3 {
+          margin: 20px 0;
+        }
 
-    .story_image_div {
-     display: flex;
-     
-     justify-content: center;
-      width: 100%;
-      height: 300px;
-      margin-bottom: 10px;
-      
-      border-radius: 10px;
-      overflow: hidden;
-    }
+        .audio-player audio {
+          display: none;
+        }
 
-    .story_image {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: cover;
-    }
+        .play-pause-button {
+          width: 40px;
+          height: 40px;
+          background-color: #000000;
+          color: white;
+          border: none;
+          border-radius: 50px;
+          cursor: pointer;
+          font-size: 24px;
+        }
 
-    .audio-player h3 {
-      margin: 20px 0;
-    }
+        .seek-bar {
+          width: 100%;
+          margin: 10px 0;
+        }
 
-    .audio-player audio {
-      display: none;
-    }
+        .seek-bar input {
+          width: 100%;
+          -webkit-appearance: none;
+          background: #050505;
+          height: 5px;
+          border-radius: 5px;
+          outline: none;
+        }
 
-    .play-pause-button {
-      width: 40px;
-      height: 40px;
-      background-color: #000000;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 24px;
-      
-    }
+        .seek-bar input::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          background: #3f4147;
+          height: 15px;
+          width: 15px;
+          border-radius: 50%;
+          cursor: pointer;
+        }
 
-  
+        .episode-list::-webkit-scrollbar {
+          width: 8px;
+        }
 
-    .seek-bar {
-      width: 100%;
-      margin: 10px 0;
-    }
+        .episode-list::-webkit-scrollbar-thumb {
+          background: #4CAF50;
+          border-radius: 10px;
+        }
 
-    .seek-bar input {
-      width: 100%;
-      -webkit-appearance: none;
-      background: #050505;
-      height: 5px;
-      border-radius: 5px;
-      outline: none;
-    }
-
-    .seek-bar input::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      background: #3f4147;
-      height: 15px;
-      width: 15px;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .episode-list::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .episode-list::-webkit-scrollbar-thumb {
-      background: #4CAF50;
-      border-radius: 10px;
-    }
-
-    .episode-list::-webkit-scrollbar-track {
-      background: #685757;
-    }
-
-
-
-
-
+        .episode-list::-webkit-scrollbar-track {
+          background: #685757;
+        }
 
     </style>
 </head>
@@ -181,13 +163,11 @@
             <h6 id="episode-title">Select an Episode</h6>
 
             <div class="bar">
-              <i class="fa-solid fa-backward"></i>
+              <i class="fa-solid fa-backward" id="previousBtn"></i>
               <button class="play-pause-button" id="playPauseBtn"><i class="fa-solid fa-play"></i></button>
-              <i class="fa-solid fa-forward"></i>
+              <i class="fa-solid fa-forward" id="nextBtn"></i>
             </div>
               <div class="audio-player">
-                
-                
                 <audio id="audio-player">
                   <source id="audio-source" src="" type="audio/mpeg">
                   Your browser does not support the audio element.
@@ -199,53 +179,39 @@
               </div>
         </div>
         <div class="div_two">
-        
-        
-        
           <div class="episode-list">
             <h4 id="story-title">Episodes</h4>
             <!-- Dynamic episodes will be inserted here -->
           </div>
-        
-        
-        
-        
-        
         </div>
     </div>
 
-
-
-
-
     <script>
       var currentEpisodeIndex = 0;
-      var baseGitHubUrl = 'https://raw.githubusercontent.com/mithul-mj/mithul-mj.github.io/6faa40ca8b517d639bb7ce463940df9a5a4be224/'; // Base raw URL to your repository
-      var folderPath = 'Whispers_of_the_Haunted_Manison'; // Example folder name
-      var episodeCount = 4; // Number of episodes (MP3 files)
+      var baseGitHubUrl = 'https://raw.githubusercontent.com/mithul-mj/mithul-mj.github.io/6faa40ca8b517d639bb7ce463940df9a5a4be224/';
+      var folderPath = 'Whispers_of_the_Haunted_Manison';
+      var episodeCount = 4;
   
-      // Extract and set the folder name as the story title
-      var storyTitle = folderPath.replace(/_/g, ' '); // Replace underscores with spaces
+      var storyTitle = folderPath.replace(/_/g, ' ');
       document.getElementById('story-title').textContent = storyTitle;
-  
-      // Generate the episode list dynamically (displaying in ascending order)
+
       var episodeListElement = document.querySelector('.episode-list');
-      for (var i = 1; i <= episodeCount; i++) { // Display episodes in ascending order
+      for (var i = 1; i <= episodeCount; i++) {
         var episodeDiv = document.createElement('div');
         episodeDiv.classList.add('episode');
-        episodeDiv.textContent = 'Episode ' + i; // Display the episodes as Episode 1, Episode 2, etc.
+        episodeDiv.textContent = 'Episode ' + i;
         episodeDiv.setAttribute('onclick', `playAudio('${baseGitHubUrl}${folderPath}/${(episodeCount - i + 1)}.mp3', 'Episode ${i}', ${episodeCount - i})`);
         episodeListElement.appendChild(episodeDiv);
       }
-  
+
       var audioPlayer = document.getElementById('audio-player');
       var audioSource = document.getElementById('audio-source');
       var episodeTitleElement = document.getElementById('episode-title');
       var seekBar = document.getElementById('seekBar');
       var playPauseBtn = document.getElementById('playPauseBtn');
-  
+
       function playAudio(audioFile, episodeTitle, index) {
-        currentEpisodeIndex = index; // Set the current episode index
+        currentEpisodeIndex = index;
         audioSource.src = audioFile;
         audioPlayer.load();
         audioPlayer.play().catch(error => {
@@ -253,15 +219,15 @@
         });
         episodeTitleElement.textContent = episodeTitle;
         playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-  
+
         audioPlayer.onloadedmetadata = function() {
           seekBar.max = Math.floor(audioPlayer.duration);
         };
         seekBar.value = 0;
       }
-  
+
       var isPlaying = false;
-  
+
       playPauseBtn.addEventListener('click', function() {
         if (isPlaying) {
           audioPlayer.pause();
@@ -274,41 +240,42 @@
         }
         isPlaying = !isPlaying;
       });
-  
+
       audioPlayer.addEventListener('ended', function() {
         playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
         isPlaying = false;
         playNextAudio();
       });
-  
+
       audioPlayer.addEventListener('timeupdate', function() {
         seekBar.value = Math.floor(audioPlayer.currentTime);
       });
-  
+
       seekBar.addEventListener('input', function() {
         audioPlayer.currentTime = seekBar.value;
       });
-  
+
       function playNextAudio() {
-        currentEpisodeIndex++;
-        if (currentEpisodeIndex < episodeCount) {
+        if (currentEpisodeIndex < episodeCount - 1) {
+          currentEpisodeIndex++;
           playAudio(`${baseGitHubUrl}${folderPath}/${(episodeCount - currentEpisodeIndex)}.mp3`, `Episode ${currentEpisodeIndex + 1}`, currentEpisodeIndex);
-        } else {
-          currentEpisodeIndex = episodeCount - 1; // Reset to last episode if no more episodes
-          playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
         }
       }
-  
-      // Automatically play the first episode (which is Episode 4 in reverse order) on page load
+
+      function playPreviousAudio() {
+        if (currentEpisodeIndex > 0) {
+          currentEpisodeIndex--;
+          playAudio(`${baseGitHubUrl}${folderPath}/${(episodeCount - currentEpisodeIndex)}.mp3`, `Episode ${currentEpisodeIndex + 1}`, currentEpisodeIndex);
+        }
+      }
+
+      // Event listeners for previous and next buttons
+      document.getElementById('nextBtn').addEventListener('click', playNextAudio);
+      document.getElementById('previousBtn').addEventListener('click', playPreviousAudio);
+
       window.onload = function() {
-        playAudio(`${baseGitHubUrl}${folderPath}/4.mp3`, 'Episode 1', 0); // Start with Episode 4 (highest)
+        playAudio(`${baseGitHubUrl}${folderPath}/4.mp3`, 'Episode 1', 0);
       };
     </script>
-
-
-
-
-
-    
 </body>
 </html>
