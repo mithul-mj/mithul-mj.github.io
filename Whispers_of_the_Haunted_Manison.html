@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mytest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    
     <style>
-        body{
+        body {
             margin: 0;
             padding: 0;
             background-color: rgb(202, 202, 202);
         }
-        .main_div{
+        .main_div {
             display: flex;
             flex-wrap: wrap;
             margin: 10px;
             height: 90vh;
-          }
-        .div_one{
+        }
+        .div_one {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -31,8 +31,15 @@
             flex: 1;
             backdrop-filter: 20px;
             min-width: 200px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            width: 100%;
+            height: 120px;
         }
-        .div_two{
+        .div_two {
             display: flex;
             background: rgba(190, 15, 15, 0.3);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -43,7 +50,7 @@
             flex: 2;
             backdrop-filter: 20px;
         }
-        .bar{
+        .bar {
             display: flex;
             width: 100%;
             justify-content: space-evenly;
@@ -51,231 +58,155 @@
             padding: 10px;
         }
 
-        .episode-list h2 {
-          text-align: center;
-          margin-bottom: 20px;
-        }
-
-        .episode {
-          display: flex;
-          width: 100%;
-          padding: 15px;
-          background-color: #8d6b6b;
-          margin-bottom: 10px;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-        }
-
-        .episode:hover {
-          background-color: #c04444;
-        }
-
         .audio-player {
-          width: 60%;
-          padding: 20px;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .story_image_div {
-         display: flex;
-         justify-content: center;
-          width: 100%;
-          height: 300px;
-          margin-bottom: 10px;
-          border-radius: 10px;
-          overflow: hidden;
-        }
-
-        .story_image {
-          max-width: 100%;
-          max-height: 100%;
-          object-fit: cover;
-        }
-
-        .audio-player h3 {
-          margin: 20px 0;
-        }
-
-        .audio-player audio {
-          display: none;
+            width: 60%;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .play-pause-button {
-          width: 40px;
-          height: 40px;
-          background-color: #000000;
-          color: white;
-          border: none;
-          border-radius: 50px;
-          cursor: pointer;
-          font-size: 24px;
+            width: 40px;
+            height: 40px;
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 24px;
         }
 
         .seek-bar {
-          width: 100%;
-          margin: 10px 0;
+            width: 100%;
+            margin: 10px 0;
         }
 
         .seek-bar input {
-          width: 100%;
-          -webkit-appearance: none;
-          background: #050505;
-          height: 5px;
-          border-radius: 5px;
-          outline: none;
+            width: 100%;
+            -webkit-appearance: none;
+            background: #050505;
+            height: 5px;
+            border-radius: 5px;
+            outline: none;
         }
 
         .seek-bar input::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          background: #3f4147;
-          height: 15px;
-          width: 15px;
-          border-radius: 50%;
-          cursor: pointer;
+            -webkit-appearance: none;
+            background: #3f4147;
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            cursor: pointer;
         }
-
-        .episode-list::-webkit-scrollbar {
-          width: 8px;
-        }
-
-        .episode-list::-webkit-scrollbar-thumb {
-          background: #4CAF50;
-          border-radius: 10px;
-        }
-
-        .episode-list::-webkit-scrollbar-track {
-          background: #685757;
-        }
-
     </style>
 </head>
 <body>
-    <div class="main_div">
-        <div class="div_one">
-            <div class="story_image_div">
-              <img class="story_image" src="https://raw.githubusercontent.com/mithul-mj/mithul-mj.github.io/6ad2ba73dbe475d661917d2e361058c793731f35/Whispers_of_the_Haunted_Manison/img.jpeg" alt="Episode Image">
-            </div>    
-            
-            <h6 id="episode-title">Select an Episode</h6>
 
+    <div class="main_div">
+        <!-- Static Music Player Div -->
+        <div class="div_one" id="music-player">
+            <h6 id="episode-title">Select an Episode</h6>
             <div class="bar">
-              <i class="fa-solid fa-backward" id="previousBtn"></i>
-              <button class="play-pause-button" id="playPauseBtn"><i class="fa-solid fa-play"></i></button>
-              <i class="fa-solid fa-forward" id="nextBtn"></i>
+                <i class="fa-solid fa-backward" id="previousBtn"></i>
+                <button class="play-pause-button" id="playPauseBtn"><i class="fa-solid fa-play"></i></button>
+                <i class="fa-solid fa-forward" id="nextBtn"></i>
             </div>
-              <div class="audio-player">
+            <div class="audio-player">
                 <audio id="audio-player">
-                  <source id="audio-source" src="" type="audio/mpeg">
-                  Your browser does not support the audio element.
+                    <source id="audio-source" src="" type="audio/mpeg">
+                    Your browser does not support the audio element.
                 </audio>
-                
                 <div class="seek-bar">
-                  <input type="range" id="seekBar" value="0" step="1" min="0" max="100" />
+                    <input type="range" id="seekBar" value="0" step="1" min="0" max="100" />
                 </div>
-              </div>
+            </div>
         </div>
         <div class="div_two">
-          <div class="episode-list">
-            <h4 id="story-title">Episodes</h4>
-            <!-- Dynamic episodes will be inserted here -->
-          </div>
+            <h4>Page Content Goes Here</h4>
         </div>
     </div>
 
     <script>
-      var currentEpisodeIndex = 0;
-      var baseGitHubUrl = 'https://raw.githubusercontent.com/mithul-mj/mithul-mj.github.io/6faa40ca8b517d639bb7ce463940df9a5a4be224/';
-      var folderPath = 'Whispers_of_the_Haunted_Manison';
-      var episodeCount = 4;
-  
-      var storyTitle = folderPath.replace(/_/g, ' ');
-      document.getElementById('story-title').textContent = storyTitle;
+        var currentEpisodeIndex = 0;
+        var episodeCount = 4;
+        var isPlaying = false;
+        var baseGitHubUrl = 'https://raw.githubusercontent.com/mithul-mj/mithul-mj.github.io/6faa40ca8b517d639bb7ce463940df9a5a4be224/';
+        var folderPath = 'Whispers_of_the_Haunted_Manison';
+        var audioPlayer = document.getElementById('audio-player');
+        var audioSource = document.getElementById('audio-source');
+        var episodeTitleElement = document.getElementById('episode-title');
+        var seekBar = document.getElementById('seekBar');
+        var playPauseBtn = document.getElementById('playPauseBtn');
+        
+        // Restore player state from localStorage
+        window.onload = function() {
+            var savedEpisode = localStorage.getItem('currentEpisodeIndex');
+            var savedTime = localStorage.getItem('currentTime');
+            var savedIsPlaying = localStorage.getItem('isPlaying');
+            currentEpisodeIndex = savedEpisode ? parseInt(savedEpisode) : 0;
+            playAudio(`${baseGitHubUrl}${folderPath}/${(episodeCount - currentEpisodeIndex)}.mp3`, `Episode ${currentEpisodeIndex + 1}`, currentEpisodeIndex);
 
-      var episodeListElement = document.querySelector('.episode-list');
-      for (var i = 1; i <= episodeCount; i++) {
-        var episodeDiv = document.createElement('div');
-        episodeDiv.classList.add('episode');
-        episodeDiv.textContent = 'Episode ' + i;
-        episodeDiv.setAttribute('onclick', `playAudio('${baseGitHubUrl}${folderPath}/${(episodeCount - i + 1)}.mp3', 'Episode ${i}', ${episodeCount - i})`);
-        episodeListElement.appendChild(episodeDiv);
-      }
+            if (savedTime) {
+                audioPlayer.currentTime = parseFloat(savedTime);
+            }
 
-      var audioPlayer = document.getElementById('audio-player');
-      var audioSource = document.getElementById('audio-source');
-      var episodeTitleElement = document.getElementById('episode-title');
-      var seekBar = document.getElementById('seekBar');
-      var playPauseBtn = document.getElementById('playPauseBtn');
-
-      function playAudio(audioFile, episodeTitle, index) {
-        currentEpisodeIndex = index;
-        audioSource.src = audioFile;
-        audioPlayer.load();
-        audioPlayer.play().catch(error => {
-          console.error("Playback error:", error);
-        });
-        episodeTitleElement.textContent = episodeTitle;
-        playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-
-        audioPlayer.onloadedmetadata = function() {
-          seekBar.max = Math.floor(audioPlayer.duration);
+            if (savedIsPlaying === 'true') {
+                audioPlayer.play();
+                playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                isPlaying = true;
+            }
         };
-        seekBar.value = 0;
-      }
 
-      var isPlaying = false;
+        function playAudio(audioFile, episodeTitle, index) {
+            currentEpisodeIndex = index;
+            audioSource.src = audioFile;
+            audioPlayer.load();
+            audioPlayer.play().catch(error => {
+                console.error("Playback error:", error);
+            });
+            episodeTitleElement.textContent = episodeTitle;
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            isPlaying = true;
 
-      playPauseBtn.addEventListener('click', function() {
-        if (isPlaying) {
-          audioPlayer.pause();
-          playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-        } else {
-          audioPlayer.play().catch(error => {
-            console.error("Playback error:", error);
-          });
-          playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            audioPlayer.onloadedmetadata = function() {
+                seekBar.max = Math.floor(audioPlayer.duration);
+            };
+            seekBar.value = 0;
+
+            // Save the current state to localStorage
+            localStorage.setItem('currentEpisodeIndex', currentEpisodeIndex);
         }
-        isPlaying = !isPlaying;
-      });
 
-      audioPlayer.addEventListener('ended', function() {
-        playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-        isPlaying = false;
-        playNextAudio();
-      });
+        playPauseBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            } else {
+                audioPlayer.play().catch(error => {
+                    console.error("Playback error:", error);
+                });
+                playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+            localStorage.setItem('isPlaying', isPlaying);  // Save play/pause state
+        });
 
-      audioPlayer.addEventListener('timeupdate', function() {
-        seekBar.value = Math.floor(audioPlayer.currentTime);
-      });
+        audioPlayer.addEventListener('timeupdate', function() {
+            seekBar.value = Math.floor(audioPlayer.currentTime);
+            localStorage.setItem('currentTime', audioPlayer.currentTime);  // Save current time
+        });
 
-      seekBar.addEventListener('input', function() {
-        audioPlayer.currentTime = seekBar.value;
-      });
+        seekBar.addEventListener('input', function() {
+            audioPlayer.currentTime = seekBar.value;
+        });
 
-      function playNextAudio() {
-        if (currentEpisodeIndex < episodeCount - 1) {
-          currentEpisodeIndex++;
-          playAudio(`${baseGitHubUrl}${folderPath}/${(episodeCount - currentEpisodeIndex)}.mp3`, `Episode ${currentEpisodeIndex + 1}`, currentEpisodeIndex);
-        }
-      }
-
-      function playPreviousAudio() {
-        if (currentEpisodeIndex > 0) {
-          currentEpisodeIndex--;
-          playAudio(`${baseGitHubUrl}${folderPath}/${(episodeCount - currentEpisodeIndex)}.mp3`, `Episode ${currentEpisodeIndex + 1}`, currentEpisodeIndex);
-        }
-      }
-
-      // Event listeners for previous and next buttons
-      document.getElementById('nextBtn').addEventListener('click', playNextAudio);
-      document.getElementById('previousBtn').addEventListener('click', playPreviousAudio);
-
-      window.onload = function() {
-        playAudio(`${baseGitHubUrl}${folderPath}/4.mp3`, 'Episode 1', 0);
-      };
+        audioPlayer.addEventListener('ended', function() {
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            isPlaying = false;
+            localStorage.setItem('isPlaying', isPlaying);  // Update play state
+        });
     </script>
 </body>
 </html>
