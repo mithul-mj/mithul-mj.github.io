@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+
+            background-color: #1c1c1c; /* Matte black effect */
+            color: #ffffff; /* Optional: white text for contrast */
+            font-family: "Barlow Condensed", serif;
+        }
+        .div1 { 
+            margin: 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+            height: 90vh;
+            font-weight: 600;
+        }   
+
+        .container {
+            position: absolute;
+            align-self: flex-end;
+            margin: 0 0 3vw 2vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Evenly spaces items */
+            align-items: center;
+            height: 20vh;
+        }
+
+        .circle {
+            width: 35px;
+            height: 35px;
+            background: rgb(0, 0, 0);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        @media (min-width: 768px) {  /* Tablets and larger */
+            .outline-text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                
+                font-size: 37vw;
+                color: white;
+                color: transparent;
+                -webkit-text-stroke: 0.07px white;
+            }
+        }
+
+        @media (max-width: 767px) {  /* Phones */
+            .outline-text {
+                display: none;
+            }
+        }
+        
+        .textdiv {
+            flex: 1;
+            min-width: 250px;
+            padding-left: 10vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .imgdiv {
+            
+            flex: 2;
+            min-width: 200px;
+            min-height: 50vh;
+            background: url(final2.png) top / cover no-repeat;
+            filter: grayscale(100%) contrast(100%) brightness(90%) sepia(10%) hue-rotate(90deg);
+            
+            /* Smooth blending */
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+        }
+
+        .hello {
+            font-size: 70px;
+        }
+
+        .myname {
+            font-size: 40px;
+            max-width: 80vw;
+        }
+
+        .description {
+            font-size: 20px;
+            font-weight: 100;
+            max-width: 80vw;
+        }
+
+        .downloadbtn {
+            margin-top: 20px;
+            color: white;
+            background-color: rgba(0,157,102,255);
+            border: none;
+            width: 150px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        
+
+        .div2 {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            justify-self: center;
+            width: 50vw;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            font-weight: 10px;
+            font-size: 20px;
+        }
+        .about{
+            font-weight: 700;
+            font-size: 60px;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="div1">
+        <div class="container">
+            <div class="circle"><i class="fa-brands fa-instagram"></i></div>
+            <div class="circle"><i class="fa-brands fa-github"></i></div>
+            <div class="circle"><i class="fa-brands fa-linkedin"></i></div>
+        </div>
+        <span class="outline-text">MITHUL</span>
+        <div class="textdiv">
+            <span class="hello">Hello.</span>
+            <span class="myname"> ---- I'am Mithul MJ</span>
+            <span class="description">
+                Fresher seeking job as Junior Software Developer
+            </span>
+
+            <!-- Button to trigger download -->
+            <button class="downloadbtn" onclick="handleDownload()">
+                <i class="fa-solid fa-download" style="color: #ffffff;"></i> Download CV
+            </button>
+        </div>
+
+        <div class="imgdiv"></div>
+    </div>
+    <div class="div2">
+            <span class="about">About me</span> 
+            <span > Motivated and detail-oriented Computer
+                Engineering diploma student with a solid
+                foundation in programming, software
+                development, and problem-solving. Eager
+                to leverage my skills to contribute to
+                innovative software solutions in a dynamic,
+                forward-thinking company</span>
+    </div>
+    
+    <script>
+        function handleDownload() {
+            const link = document.createElement('a');
+            link.href = 'w.pdf'; // Ensure this is the correct path
+            link.download = 'Mithul_MJ_CV.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+
+</body>
+</html>
