@@ -17,6 +17,13 @@
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
     <!-- custom css -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- email js -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+      (function(){
+        emailjs.init("z36seaF9RYtbGUfBS"); // public key
+      })();
+    </script>
 </head>
 
 <body class="tmp-white-version">
@@ -979,65 +986,61 @@ These projects reflect my ability to apply machine learning to solve real-world 
                         <div class="col-lg-7">
                             <div class="contact-inner">
                                 <div class="contact-form">
-                                    
-                                    <div id="form-messages" class="error" style="color: red; margin-bottom: 10px;"></div>
+                                    <div id="form-messages" class="error"></div>
+                                    <form class="tmp-dynamic-form" id="contact-form" method="POST" onsubmit="return sendEmail(event);">
+    
+                                      <!-- 🔧 Hidden configuration fields -->
+                                      <input type="hidden" name="_template" value="table">
+                                      <input type="hidden" name="_captcha" value="true">
+                                      <input type="hidden" name="_subject" value="New Contact From Portfolio">
+                                      <input type="hidden" name="_autoresponse" value="Thanks for reaching out! I’ll get back to you soon.">
+                                      <input type="text" name="_honey" style="display:none">
 
-                                      <form class="tmp-dynamic-form" id="contact-form"
-                                            method="POST"
-                                            action="https://formsubmit.co/mithulmj2004@gmail.com"
-                                            onsubmit="return form_submited();">
-
-                                        <!-- Hidden FormSubmit settings -->
-                                        <input type="hidden" name="_template" value="table">
-                                        <input type="hidden" name="_captcha" value="true">
-                                        <input type="hidden" name="_subject" value="New Contact From Portfolio">
-                                        <input type="hidden" name="_autoresponse" value="Thanks for reaching out! I’ll get back to you soon.">
-                                        <input type="text" name="_honey" style="display:none">
-
-                                        <div class="contact-form-wrapper row">
+                                      <div class="contact-form-wrapper row">
                                           <div class="col-lg-6">
-                                            <div class="form-group">
-                                              <input class="input-field" name="name" id="contact-name" placeholder="Your Name" type="text" required>
-                                            </div>
+                                              <div class="form-group">  
+                                                  <input class="input-field" name="name" id="contact-name" placeholder="Your Name" type="text" required>
+                                              </div>
                                           </div>
 
                                           <div class="col-lg-6">
-                                            <div class="form-group">
-                                              <input class="input-field" id="contact-phone" name="phone" placeholder="Phone Number" type="tel" required>
-                                            </div>
+                                              <div class="form-group">
+                                                  <input class="input-field" id="contact-phone" name="phone" placeholder="Phone Number" type="tel" required>
+                                              </div>
                                           </div>
 
                                           <div class="col-lg-6">
-                                            <div class="form-group">
-                                              <input class="input-field" id="contact-email" name="email" placeholder="Your Email" type="email" required>
-                                            </div>
+                                              <div class="form-group">
+                                                  <input class="input-field" id="contact-email" name="email" placeholder="Your Email" type="email" required>
+                                              </div>
                                           </div>
 
                                           <div class="col-lg-6">
-                                            <div class="form-group">
-                                              <input class="input-field" type="text" id="subject" name="form_subject" placeholder="Subject">
-                                            </div>
+                                              <div class="form-group">
+                                                  <!-- ✅ Renamed from 'subject' to avoid conflict -->
+                                                  <input class="input-field" type="text" id="subject" name="form_subject" placeholder="Subject">
+                                              </div>
                                           </div>
 
                                           <div class="col-lg-12">
-                                            <div class="form-group">
-                                              <textarea class="input-field" placeholder="Your Message" name="message" id="contact-message" required></textarea>
-                                            </div>
+                                              <div class="form-group">
+                                                  <textarea class="input-field" placeholder="Your Message" name="message" id="contact-message" required></textarea>
+                                              </div>
                                           </div>
 
                                           <div class="col-lg-12">
-                                            <div class="tmp-button-here">
-                                              <button class="tmp-btn hover-icon-reverse radius-round w-100" name="submit" type="submit" id="submit">
-                                                <span class="icon-reverse-wrapper">
-                                                  <span class="btn-text">Appointment Now</span>
-                                                  <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                  <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right"></i></span>
-                                                </span>
-                                              </button>
-                                            </div>
+                                              <div class="tmp-button-here">
+                                                  <button class="tmp-btn hover-icon-reverse radius-round w-100" name="submit" type="submit" id="submit">
+                                                      <span class="icon-reverse-wrapper">
+                                                          <span class="btn-text">Appointment Now</span>
+                                                          <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right"></i></span>
+                                                          <span class="btn-icon"><i class="fa-sharp fa-regular fa-arrow-right"></i></span>
+                                                      </span>
+                                                  </button>
+                                              </div>
                                           </div>
-                                        </div>
-                                      </form>
+                                      </div>
+                                  </form>
 
                                 </div>
                             </div>
@@ -1886,9 +1889,25 @@ These projects reflect my ability to apply machine learning to solve real-world 
     <script src="assets/js/plugins/contact.form.js"></script>
     <script src="assets/js/vendor/backtop.js"></script>
     <script src="assets/js/plugins/text-type.js"></script>
-    <script src="validation.js"></script>
     <!-- custom Js -->
     <script src="assets/js/main.js"></script>
+    <!-- email js -->
+    <script>
+      function sendEmail(e) {
+        e.preventDefault(); // stop normal form submission
+
+        emailjs.sendForm('service_9ni9bkf', 'template_f1uizrg', '#contact-form')
+          .then(function(response) {
+            alert("✅ Message sent successfully!");
+            document.getElementById("contact-form").reset(); // clear the form
+          }, function(error) {
+            alert("❌ Failed to send message: " + error.text);
+          });
+
+        return false; // prevent form refresh
+      }
+    </script>
+
 
 </body>
 
