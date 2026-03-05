@@ -28,7 +28,7 @@ function sendEmail(e) {
     resDiv.style.color = "red";
     return;
   }
-
+  
   emailjs.sendForm('service_9ni9bkf', 'template_f1uizrg', '#contact-form')
     .then(function(response) {
       resDiv.innerText = "✅ Message sent successfully!";

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mithul-mj.github.io/sitemap.xml
